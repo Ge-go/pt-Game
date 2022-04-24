@@ -2,10 +2,10 @@ package datasource
 
 import (
 	goredis "github.com/go-redis/redis/v8"
-	"gobasic/ptc-Game/common/pkg/config"
-	"gobasic/ptc-Game/common/pkg/mysql"
-	"gobasic/ptc-Game/common/pkg/redis"
 	"gorm.io/gorm"
+	"ptc-Game/common/pkg/config"
+	"ptc-Game/common/pkg/mysql"
+	"ptc-Game/common/pkg/redis"
 )
 
 var MaterailDataSource *DataMaterialSources

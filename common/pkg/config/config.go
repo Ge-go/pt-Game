@@ -13,7 +13,7 @@ var conf = new(Config)
 func Init(path string) (*Config, error) {
 	//默认使用dev.yaml配置文件
 	if path == "" {
-		viper.AddConfigPath("./ptc-Game/conf")
+		viper.AddConfigPath("./conf")
 		viper.SetConfigName("dev")
 		viper.SetConfigType("yaml")
 	} else {

@@ -3,10 +3,10 @@ package mysql
 import (
 	"fmt"
 	"github.com/pkg/errors"
-	"gobasic/ptc-Game/common/pkg/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"ptc-Game/common/pkg/config"
 	"time"
 )
 

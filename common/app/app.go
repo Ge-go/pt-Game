@@ -10,8 +10,8 @@ import (
 	"github.com/kataras/iris/v12/core/host"
 	"github.com/kataras/iris/v12/middleware/recover"
 	"github.com/kataras/iris/v12/middleware/requestid"
-	"gobasic/ptc-Game/common/pkg/accesslog"
-	"gobasic/ptc-Game/common/pkg/config"
+	"ptc-Game/common/pkg/accesslog"
+	"ptc-Game/common/pkg/config"
 	"strings"
 	"time"
 )

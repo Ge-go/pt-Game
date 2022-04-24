@@ -1,4 +1,4 @@
-module gobasic/ptc-Game
+module ptc-Game
 
 go 1.17
 

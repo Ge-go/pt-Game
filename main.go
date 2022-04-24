@@ -3,13 +3,13 @@ package main
 import (
 	"flag"
 	"github.com/kataras/iris/v12/mvc"
-	"gobasic/ptc-Game/account"
-	"gobasic/ptc-Game/common/app"
-	"gobasic/ptc-Game/common/datasource"
-	"gobasic/ptc-Game/common/pkg/config"
-	"gobasic/ptc-Game/common/pkg/email"
-	"gobasic/ptc-Game/common/pkg/logiclog"
-	_ "gobasic/ptc-Game/docs" // 初始化swagger
+	"ptc-Game/account"
+	"ptc-Game/common/app"
+	"ptc-Game/common/datasource"
+	"ptc-Game/common/pkg/config"
+	"ptc-Game/common/pkg/email"
+	"ptc-Game/common/pkg/logiclog"
+	_ "ptc-Game/docs" // 初始化swagger
 )
 
 var confFile = flag.String("c", "", "配置文件名称")
@@ -71,7 +71,7 @@ func main() {
 	// 注册路由
 	apiv1 := app.Iris.Party("/api/v1")
 	//apiv2 := app.Iris.Party("/api/v2")
-	mvc.Configure(apiv1.Party("/user"), account.Account)       // 账号模块
+	mvc.Configure(apiv1.Party("/user"), account.Account) // 账号模块
 	//mvc.Configure(apiv1.Party("/index"), index.Index)          // 首页模块
 	//mvc.Configure(apiv1.Party("/userInfo"), userinfo.UserInfo) // 个人信息模块
 	//mvc.Configure(apiv1.Party("/task"), task.Task)             // 任务模块

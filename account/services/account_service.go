@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/pkg/errors"
-	"gobasic/ptc-Game/account/repositories"
-	"gobasic/ptc-Game/account/web/viewmodels"
-	"gobasic/ptc-Game/common/pkg/captcha"
+	"ptc-Game/account/repositories"
+	"ptc-Game/account/web/viewmodels"
+	"ptc-Game/common/pkg/captcha"
 	"time"
 )
 

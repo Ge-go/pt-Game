@@ -5,11 +5,11 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/google/uuid"
 	"github.com/kataras/iris/v12"
-	"gobasic/ptc-Game/account/services"
-	"gobasic/ptc-Game/account/web/viewmodels"
-	"gobasic/ptc-Game/common/conf"
-	"gobasic/ptc-Game/common/pkg/logiclog"
-	"gobasic/ptc-Game/common/response"
+	"ptc-Game/account/services"
+	"ptc-Game/account/web/viewmodels"
+	"ptc-Game/common/conf"
+	"ptc-Game/common/pkg/logiclog"
+	"ptc-Game/common/response"
 )
 
 type AccountController struct {

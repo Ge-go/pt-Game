@@ -1,9 +1,8 @@
 package services
 
-import "gobasic/ptc-Game/account/repositories"
+import "ptc-Game/account/repositories"
 
 type YoutubeService interface {
-
 }
 
 func NewYoutubeService(repo repositories.AccountRepository) YoutubeService {

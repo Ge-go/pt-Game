@@ -4,10 +4,10 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
-	"gobasic/ptc-Game/common/pkg/logiclog"
-	"gobasic/ptc-Game/common/response"
 	"golang.org/x/net/context"
 	"net/http"
+	"ptc-Game/common/pkg/logiclog"
+	"ptc-Game/common/response"
 	"time"
 )
 

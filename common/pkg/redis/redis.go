@@ -2,8 +2,8 @@ package redis
 
 import (
 	"github.com/go-redis/redis/v8"
-	"gobasic/ptc-Game/common/pkg/config"
 	"golang.org/x/net/context"
+	"ptc-Game/common/pkg/config"
 	"time"
 )
 

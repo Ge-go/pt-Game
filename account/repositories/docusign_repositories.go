@@ -2,8 +2,8 @@ package repositories
 
 import (
 	"github.com/go-redis/redis/v8"
-	"gobasic/ptc-Game/common/datasource"
 	"gorm.io/gorm"
+	"ptc-Game/common/datasource"
 )
 
 type DocusignRepository interface {
