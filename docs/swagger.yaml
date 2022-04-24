@@ -1,0 +1,2117 @@
+basePath: /
+definitions:
+  e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_account_web_viewmodels.ResetPasswordReq:
+    properties:
+      confirmPassword:
+        example: 123456Abc@123
+        type: string
+      email:
+        example: 1254@qq.com
+        type: string
+      emailCode:
+        example: "123456"
+        type: string
+      password:
+        example: 123456Abc@123
+        type: string
+    type: object
+  e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_task_v2_views.ResponseCommon:
+    properties:
+      status:
+        type: boolean
+    type: object
+  e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_user_v2_views.ResponseCommon:
+    properties:
+      status:
+        type: boolean
+    type: object
+  e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_userinfo_web_viewmodels.ResetPasswordReq:
+    properties:
+      confirmPassword:
+        example: 123456Abc@123
+        type: string
+      currentPassword:
+        example: 123456Abc@123
+        type: string
+      newPassword:
+        example: 123456Abc@123
+        type: string
+    type: object
+  response.Res:
+    properties:
+      data:
+        additionalProperties: true
+        type: object
+      msg:
+        type: string
+      ret:
+        type: integer
+    type: object
+  viewmodels.AddFavoriteReq:
+    properties:
+      mateId:
+        example: 1
+        type: integer
+      mateUuid:
+        example: 426aca11-d5bb-4c81-b61c-96da64669ff3
+        type: string
+    type: object
+  viewmodels.AnnouncementItem:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+  viewmodels.AnnouncementRsp:
+    properties:
+      AnnouncementList:
+        items:
+          $ref: '#/definitions/viewmodels.AnnouncementItem'
+        type: array
+    type: object
+  viewmodels.ApplyTaskReq:
+    properties:
+      taskId:
+        example: 1
+        type: integer
+    type: object
+  viewmodels.BannerItem:
+    properties:
+      activityId:
+        type: integer
+      description:
+        type: string
+      imageUrl:
+        type: string
+      rewardIntro:
+        type: string
+      taskIntro:
+        type: string
+      taskName:
+        type: string
+      taskRegion:
+        type: string
+      title:
+        type: string
+    type: object
+  viewmodels.BannerRsp:
+    properties:
+      bannerList:
+        items:
+          $ref: '#/definitions/viewmodels.BannerItem'
+        type: array
+    type: object
+  viewmodels.BindGameAccountReq:
+    properties:
+      gameAccount:
+        example: game account
+        type: string
+      gameNameId:
+        example: 1
+        type: integer
+    type: object
+  viewmodels.CancelApplyTaskReq:
+    properties:
+      taskId:
+        example: 1
+        type: integer
+    type: object
+  viewmodels.CancelPartakeTaskReq:
+    properties:
+      taskId:
+        example: 1
+        type: integer
+    type: object
+  viewmodels.DeleteFavoriteReq:
+    properties:
+      mateId:
+        example: 1
+        type: integer
+      mateUuid:
+        example: 426aca11-d5bb-4c81-b61c-96da64669ff3
+        type: string
+    type: object
+  viewmodels.EditTaskReq:
+    properties:
+      previousVideoUrl:
+        items:
+          type: string
+        type: array
+      taskId:
+        example: 1
+        type: integer
+      videoUrl:
+        items:
+          type: string
+        type: array
+    type: object
+  viewmodels.EditUserInfoReq:
+    properties:
+      gender:
+        description: 0男 1女 2其他
+        example: 0
+        type: integer
+      language:
+        example: en
+        type: string
+      tagId:
+        example: 1
+        type: integer
+      userName:
+        example: long
+        type: string
+    type: object
+  viewmodels.FavoriteHomeItem:
+    properties:
+      createTime:
+        example: 1628925569000
+        type: integer
+      favoriteStatus:
+        example: 0
+        type: integer
+      language:
+        example: en
+        type: string
+      mateDownloadNum:
+        example: 23
+        type: integer
+      mateFavoriteNum:
+        example: 10
+        type: integer
+      mateFileFormat:
+        example: jpg
+        type: string
+      mateFileName:
+        example: test01
+        type: string
+      mateFileSize:
+        example: 0.1M
+        type: string
+      mateId:
+        example: 1
+        type: integer
+      mateModule:
+        example: 基础2D/音轨
+        type: string
+      matePath:
+        example: material/Car/2D/v1.1.0/426aca11-d5bb-4c81-b61c-96da64669ff3.jpg
+        type: string
+      matePermission:
+        example: 0
+        type: integer
+      mateStatus:
+        example: 0
+        type: integer
+      mateType:
+        example: 载具
+        type: string
+      mateUuid:
+        example: 426aca11-d5bb-4c81-b61c-96da64669ff3
+        type: string
+      mateVersion:
+        example: 1.0.0
+        type: string
+      thumFileFormat:
+        example: jpg
+        type: string
+      thumPath:
+        example: thumbnail/Car/2D/v1.1.0/426aca11-d5bb-4c81-b61c-96da64669ff3.jpg
+        type: string
+      thumdownloadUrl:
+        example: http://34.95.81.236/material/temp/5c218844-30c5-4c0c-a4fe-2cc6aa158ecd.png
+        type: string
+      updateTime:
+        example: 1628925569000
+        type: integer
+      uploader:
+        example: 超级无敌管理员
+        type: string
+    type: object
+  viewmodels.FavoriteHomeRsp:
+    properties:
+      mateHomeList:
+        items:
+          $ref: '#/definitions/viewmodels.FavoriteHomeItem'
+        type: array
+      total:
+        example: 100
+        type: integer
+    type: object
+  viewmodels.GameAccountItem:
+    properties:
+      gameAccount:
+        type: string
+      gameId:
+        type: integer
+      gameName:
+        type: string
+    type: object
+  viewmodels.GameItem:
+    properties:
+      gameId:
+        type: integer
+      gameName:
+        type: string
+      language:
+        type: string
+    type: object
+  viewmodels.GetCaptchaRsp:
+    properties:
+      base64:
+        type: string
+      id:
+        type: string
+    type: object
+  viewmodels.GetGameListRsp:
+    properties:
+      gameList:
+        items:
+          $ref: '#/definitions/viewmodels.GameItem'
+        type: array
+    type: object
+  viewmodels.GetMaterialTypeAndModuleListRsp:
+    properties:
+      moduleList:
+        items:
+          type: string
+        type: array
+      typeList:
+        items:
+          type: string
+        type: array
+    type: object
+  viewmodels.GetMyMessageListReq:
+    properties:
+      language:
+        example: zh
+        type: string
+      pageNumber:
+        example: 1
+        type: integer
+      pageSize:
+        example: 10
+        type: integer
+    type: object
+  viewmodels.GetMyTaskListItem:
+    properties:
+      auditStatus:
+        type: string
+      authorTaskId:
+        type: integer
+      endTime:
+        type: string
+      isReward:
+        type: integer
+      language:
+        type: string
+      name:
+        type: string
+      region:
+        type: string
+      rewardIntro:
+        type: string
+      startTime:
+        type: string
+      taskId:
+        type: integer
+      taskStatus:
+        type: integer
+      works:
+        items:
+          $ref: '#/definitions/viewmodels.GetMyTaskListItemWorks'
+        type: array
+    type: object
+  viewmodels.GetMyTaskListItemWorks:
+    properties:
+      channel_type:
+        type: integer
+      new_fans_num:
+        type: integer
+      work_like_num:
+        type: integer
+      work_url:
+        type: string
+      work_watch_num:
+        type: integer
+    type: object
+  viewmodels.GetMyTaskListRsq:
+    properties:
+      myTaskList:
+        items:
+          $ref: '#/definitions/viewmodels.GetMyTaskListItem'
+        type: array
+      total:
+        type: integer
+    type: object
+  viewmodels.GetTaskDetailsRsq:
+    properties:
+      auditStatus:
+        type: string
+      denyReason:
+        type: string
+      endTime:
+        type: string
+      imageUrl:
+        type: string
+      isStart:
+        type: boolean
+      language:
+        type: string
+      name:
+        type: string
+      region:
+        type: string
+      rewardIntro:
+        type: string
+      startTime:
+        type: string
+      taskId:
+        type: integer
+      taskIntro:
+        type: string
+      taskStatus:
+        type: integer
+      userId:
+        type: integer
+      videoUrl:
+        type: string
+    type: object
+  viewmodels.GetTaskListItem:
+    properties:
+      endTime:
+        type: string
+      imageUrl:
+        type: string
+      isApply:
+        type: integer
+      isReward:
+        description: AuditStatus string    `json:"auditStatus"`
+        type: integer
+      language:
+        type: string
+      name:
+        type: string
+      region:
+        type: string
+      rewardIntro:
+        type: string
+      startTime:
+        type: string
+      taskId:
+        type: integer
+      taskIntro:
+        description: 任务描述
+        type: string
+      taskStatus:
+        type: integer
+    type: object
+  viewmodels.GetTaskListRsq:
+    properties:
+      taskList:
+        items:
+          $ref: '#/definitions/viewmodels.GetTaskListItem'
+        type: array
+      total:
+        type: integer
+    type: object
+  viewmodels.GetUserInfoRsp:
+    properties:
+      avatarUrl:
+        type: string
+      channelId:
+        description: 渠道Id
+        type: integer
+      country:
+        type: string
+      createdAt:
+        type: string
+      email:
+        type: string
+      gameAccountList:
+        $ref: '#/definitions/viewmodels.GameAccountItem'
+      gender:
+        description: 0男 1女 2其他
+        type: integer
+      isAdult:
+        type: integer
+      language:
+        type: string
+      level:
+        type: string
+      region:
+        type: string
+      tagId:
+        type: integer
+      tagList:
+        items:
+          $ref: '#/definitions/viewmodels.TagListItem'
+        type: array
+      tagName:
+        type: string
+      userId:
+        type: integer
+      userName:
+        type: string
+      youtubeAccount:
+        type: string
+    type: object
+  viewmodels.GetUserLevelInfoRsp:
+    properties:
+      level:
+        $ref: '#/definitions/viewmodels.Level'
+      nextLevel:
+        $ref: '#/definitions/viewmodels.Level'
+      useDownloadNum:
+        type: integer
+    type: object
+  viewmodels.GetUserTagRsp:
+    properties:
+      tagList:
+        items:
+          $ref: '#/definitions/viewmodels.UserTag'
+        type: array
+    type: object
+  viewmodels.JwtToken:
+    properties:
+      isLocked:
+        type: integer
+      token:
+        type: string
+      userName:
+        type: string
+    type: object
+  viewmodels.Level:
+    properties:
+      downloadNum:
+        type: integer
+      level:
+        description: Id          int    `json:"id"`
+        type: integer
+      minFansNum:
+        type: integer
+    type: object
+  viewmodels.LoginReq:
+    properties:
+      captchaId:
+        example: "1"
+        type: string
+      captchaValue:
+        example: xxx
+        type: string
+      email:
+        example: 1254@qq.com
+        type: string
+      password:
+        example: 123456Abc@123
+        type: string
+    type: object
+  viewmodels.MateDownloadRsp:
+    properties:
+      downloadLink:
+        type: string
+    type: object
+  viewmodels.MateHomeItem:
+    properties:
+      createTime:
+        example: 1628925569000
+        type: integer
+      favoriteStatus:
+        example: 0
+        type: integer
+      language:
+        example: en
+        type: string
+      mateDownloadNum:
+        example: 23
+        type: integer
+      mateFavoriteNum:
+        example: 10
+        type: integer
+      mateFileFormat:
+        example: jpg
+        type: string
+      mateFileName:
+        example: test01
+        type: string
+      mateFileSize:
+        example: 0.1M
+        type: string
+      mateId:
+        example: 1
+        type: integer
+      mateModule:
+        example: 基础2D/音轨
+        type: string
+      matePath:
+        example: material/Car/2D/v1.1.0/426aca11-d5bb-4c81-b61c-96da64669ff3.jpg
+        type: string
+      matePermission:
+        example: 0
+        type: integer
+      mateStatus:
+        example: 0
+        type: integer
+      mateType:
+        example: 载具
+        type: string
+      mateUuid:
+        example: 426aca11-d5bb-4c81-b61c-96da64669ff3
+        type: string
+      mateVersion:
+        example: 1.0.0
+        type: string
+      thumFileFormat:
+        example: jpg
+        type: string
+      thumPath:
+        example: thumbnail/Car/2D/v1.1.0/426aca11-d5bb-4c81-b61c-96da64669ff3.jpg
+        type: string
+      thumdownloadUrl:
+        example: http://34.95.81.236/material/temp/5c218844-30c5-4c0c-a4fe-2cc6aa158ecd.png
+        type: string
+      updateTime:
+        example: 1628925569000
+        type: integer
+      uploader:
+        example: 超级无敌管理员
+        type: string
+    type: object
+  viewmodels.MateHomeRsp:
+    properties:
+      mateHomeList:
+        items:
+          $ref: '#/definitions/viewmodels.MateHomeItem'
+        type: array
+      total:
+        example: 100
+        type: integer
+    type: object
+  viewmodels.RegisterReq:
+    properties:
+      gender:
+        description: 0男 1女 2其他
+        example: 1
+        type: integer
+      isEuropean:
+        description: 勾选协议
+        example: 1
+        type: integer
+      kind:
+        example: 2
+        type: integer
+      language:
+        example: en
+        type: string
+      sub:
+        example: "106268783650461104364"
+        type: string
+    type: object
+  viewmodels.ResponseMinorCert:
+    properties:
+      age:
+        description: 年龄
+        example: 16
+        type: integer
+      isAdult:
+        description: 是否成年
+        example: true
+        type: boolean
+      isEuropean:
+        description: 是否欧盟
+        example: true
+        type: boolean
+      sub:
+        description: key
+        type: string
+    type: object
+  viewmodels.SetMessageStatusReq:
+    properties:
+      messageId:
+        example: 1,2,3
+        type: string
+    type: object
+  viewmodels.TagListItem:
+    properties:
+      tagId:
+        type: integer
+      tagName:
+        type: string
+    type: object
+  viewmodels.UserTag:
+    properties:
+      text:
+        type: string
+      value:
+        type: integer
+    type: object
+  viewmodels.VerifyEmailReq:
+    properties:
+      email:
+        example: 1254@qq.com
+        type: string
+      emailCode:
+        example: "123456"
+        type: string
+    type: object
+  viewmodels.VersionDetailReq:
+    properties:
+      mateId:
+        example: 1
+        type: integer
+      mateVersion:
+        example: 1.0.0
+        type: string
+    type: object
+  viewmodels.VersionDetailRsp:
+    properties:
+      createTime:
+        example: 1628925569000
+        type: integer
+      favoriteStatus:
+        example: 0
+        type: integer
+      language:
+        example: en
+        type: string
+      mateDownloadNum:
+        example: 23
+        type: integer
+      mateFavoriteNum:
+        example: 10
+        type: integer
+      mateFileFormat:
+        example: jpg
+        type: string
+      mateFileName:
+        example: test01
+        type: string
+      mateFileSize:
+        example: 0.1M
+        type: string
+      mateId:
+        example: 1
+        type: integer
+      mateModule:
+        example: 基础2D/音轨
+        type: string
+      matePath:
+        example: material/Car/2D/v1.1.0/426aca11-d5bb-4c81-b61c-96da64669ff3.jpg
+        type: string
+      matePermission:
+        example: 0
+        type: integer
+      mateStatus:
+        example: 0
+        type: integer
+      mateType:
+        example: 载具
+        type: string
+      mateUuid:
+        example: 426aca11-d5bb-4c81-b61c-96da64669ff3
+        type: string
+      mateVersion:
+        example: 1.0.0
+        type: string
+      thumFileFormat:
+        example: jpg
+        type: string
+      thumPath:
+        example: thumbnail/Car/2D/v1.1.0/426aca11-d5bb-4c81-b61c-96da64669ff3.jpg
+        type: string
+      thumdownloadUrl:
+        example: http://34.95.81.236/material/temp/5c218844-30c5-4c0c-a4fe-2cc6aa158ecd.png
+        type: string
+      updateTime:
+        example: 1628925569000
+        type: integer
+      uploader:
+        example: 超级无敌管理员
+        type: string
+    type: object
+  viewmodels.VersionListReq:
+    properties:
+      mateId:
+        example: 1
+        type: integer
+    type: object
+  viewmodels.VersionListRsp:
+    properties:
+      versionList:
+        example:
+        - versionList
+        items:
+          type: string
+        type: array
+    type: object
+  viewmodels.WonderfulWorkItem:
+    properties:
+      description:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+      url:
+        type: string
+    type: object
+  viewmodels.WonderfulWorkRsp:
+    properties:
+      wonderfulWorkList:
+        items:
+          $ref: '#/definitions/viewmodels.WonderfulWorkItem'
+        type: array
+    type: object
+  views.RequestAddChannel:
+    properties:
+      channel_account:
+        description: "渠道账户 \t\t渠道类型为2,3必传"
+        type: string
+      channel_fans:
+        description: "渠道粉丝数 \t\t渠道类型为2,3必传"
+        type: integer
+      channel_type:
+        description: "渠道类型 \t\t1.youtube 2.ins 3.facebook"
+        type: integer
+      google_code:
+        description: "google-code \t渠道类型为1必传"
+        type: string
+    type: object
+  views.RequestDeleteChannel:
+    properties:
+      channel_id:
+        description: 删除的渠道Id 后端返回
+        type: integer
+    type: object
+  views.RequestGetTask:
+    properties:
+      task_id:
+        type: integer
+    type: object
+  views.RequestSetPrimaryChannel:
+    properties:
+      channel_id:
+        description: 要设置主渠道Id
+        type: integer
+    type: object
+  views.RequestUpdateChannel:
+    properties:
+      channel_account:
+        description: 渠道账户
+        type: string
+      channel_fans:
+        description: "渠道粉丝数 \t\t渠道类型为2,3必传"
+        type: integer
+      channel_id:
+        description: 更新的渠道Id 后端返回
+        type: integer
+    type: object
+  views.RequestUploadWorkList:
+    properties:
+      action:
+        description: "操作\t\t\t//1.新增 2.修改 3.删除"
+        type: integer
+      work_channel_type:
+        description: "作品渠道类型\t//1.youtube 2.ins 3.facebook"
+        type: integer
+      work_id:
+        description: 作者作品Id action为2|3必传
+        type: integer
+      work_url:
+        description: 作品连接
+        type: string
+    required:
+    - work_url
+    type: object
+  views.RequestUploadWorks:
+    properties:
+      task_id:
+        type: integer
+      workList:
+        items:
+          $ref: '#/definitions/views.RequestUploadWorkList'
+        type: array
+    type: object
+  views.ResponseGetChannelsList:
+    properties:
+      channel_account:
+        description: 渠道账户
+        type: string
+      channel_fans:
+        description: 渠道账户粉丝数
+        type: integer
+      channel_type:
+        description: 渠道类型 1.youtube 2.ins 3.facebook
+        type: integer
+      error_note:
+        description: 审核失败信息
+        type: string
+      id:
+        type: integer
+      status:
+        description: 状态 0.审核失败 1.待审核 2.审核成功
+        type: integer
+    type: object
+  views.ResponseGetPrimaryChannelStatus:
+    properties:
+      channel_id:
+        description: 渠道Id
+        type: integer
+      login_num:
+        description: 登录次数
+        type: integer
+    type: object
+  views.ResponseGetTask:
+    properties:
+      auditStatus:
+        type: string
+      denyReason:
+        type: string
+      endTime:
+        type: string
+      imageUrl:
+        type: string
+      isStart:
+        type: boolean
+      language:
+        type: string
+      name:
+        type: string
+      region:
+        type: string
+      rewardIntro:
+        type: string
+      startTime:
+        type: string
+      taskId:
+        type: integer
+      taskIntro:
+        type: string
+      taskStatus:
+        type: integer
+      userId:
+        type: integer
+      workList:
+        items:
+          $ref: '#/definitions/views.ResponseGetTaskWorkList'
+        type: array
+    type: object
+  views.ResponseGetTaskWorkList:
+    properties:
+      channel_type:
+        type: integer
+      id:
+        type: integer
+      work_url:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact:
+    email: alickwei@tencent.com
+    name: alickwei
+    url: http://www.swagger.io/support
+  description: 海外内容创作者平台-用户端 API文档
+  title: Swagger API文档
+  version: "1.0"
+paths:
+  /api/v1/index/announcement:
+    get:
+      consumes:
+      - text/plain
+      description: 获取公告列表
+      parameters:
+      - example: 1
+        in: query
+        name: id
+        type: integer
+      - example: zh
+        in: query
+        name: language
+        type: string
+      - example: 500
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.AnnouncementRsp'
+      summary: 获取公告列表
+      tags:
+      - 首页 相关接口
+  /api/v1/index/banner:
+    get:
+      consumes:
+      - text/plain
+      description: 获取banner（首页轮播图）
+      parameters:
+      - example: 1,2,3
+        in: query
+        name: activityId
+        type: string
+      - example: zh
+        in: query
+        name: language
+        type: string
+      - example: 500
+        in: query
+        name: limit
+        type: integer
+      - example: Oceania
+        in: query
+        name: region
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.BannerRsp'
+      summary: 获取banner
+      tags:
+      - 首页 相关接口
+  /api/v1/index/wonderfulWork:
+    get:
+      consumes:
+      - text/plain
+      description: 获取精彩作品列表（首页youtube视频）
+      parameters:
+      - example: zh
+        in: query
+        name: language
+        type: string
+      - example: 500
+        in: query
+        name: limit
+        type: integer
+      - example: 2
+        in: query
+        name: status
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.WonderfulWorkRsp'
+      summary: 获取精彩作品列表
+      tags:
+      - 首页 相关接口
+  /api/v1/message/getMyMessage:
+    get:
+      consumes:
+      - text/plain
+      description: 获取消息列表
+      parameters:
+      - example: zh
+        in: query
+        name: language
+        type: string
+      - example: 1
+        in: query
+        name: pageNumber
+        type: integer
+      - example: 10
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 获取消息列表
+      tags:
+      - 消息 相关接口
+  /api/v1/message/setMessageStatus:
+    post:
+      consumes:
+      - application/json
+      description: 设置消息已读
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.SetMessageStatusReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetMyMessageListReq'
+      summary: 设置消息已读
+      tags:
+      - 消息 相关接口
+  /api/v1/task/applyTask:
+    post:
+      consumes:
+      - application/json
+      description: 报名任务
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.ApplyTaskReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 报名任务
+      tags:
+      - 任务 相关接口
+  /api/v1/task/cancelApplyTask:
+    post:
+      consumes:
+      - application/json
+      description: 取消任务报名
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.CancelApplyTaskReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 取消任务报名
+      tags:
+      - 任务 相关接口
+  /api/v1/task/cancelPartakeTask:
+    post:
+      consumes:
+      - application/json
+      description: 取消任务参与
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.CancelPartakeTaskReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 取消任务参与
+      tags:
+      - 任务 相关接口
+  /api/v1/task/editTask:
+    post:
+      consumes:
+      - application/json
+      description: 编辑任务
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.EditTaskReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 编辑任务
+      tags:
+      - 任务 相关接口
+  /api/v1/task/getIndexTaskLIst:
+    get:
+      consumes:
+      - text/plain
+      description: 获取首页任务列表
+      parameters:
+      - example: zh
+        in: query
+        name: language
+        type: string
+      - example: 1
+        in: query
+        name: pageNumber
+        type: integer
+      - example: 10
+        in: query
+        name: pageSize
+        type: integer
+      - example: Africa
+        in: query
+        name: region
+        type: string
+      - example: 1
+        in: query
+        name: taskId
+        type: integer
+      - example: 3
+        in: query
+        name: taskStatus
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetTaskListRsq'
+      summary: 获取首页任务列表
+      tags:
+      - 任务 相关接口
+  /api/v1/task/getMyTaskList:
+    get:
+      consumes:
+      - text/plain
+      description: 获取我的任务列表
+      parameters:
+      - example: pending
+        in: query
+        name: auditStatus
+        type: string
+      - example: 1
+        in: query
+        name: isReward
+        type: integer
+      - example: zh
+        in: query
+        name: language
+        type: string
+      - example: desc
+        in: query
+        name: likesOrder
+        type: string
+      - example: asc
+        in: query
+        name: newFollowersOrder
+        type: string
+      - example: 1
+        in: query
+        name: pageNumber
+        type: integer
+      - example: 10
+        in: query
+        name: pageSize
+        type: integer
+      - example: 0
+        in: query
+        name: taskStatus
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetMyTaskListRsq'
+      summary: 获取我的任务列表
+      tags:
+      - 任务 相关接口
+  /api/v1/task/getTaskDetails:
+    get:
+      consumes:
+      - text/plain
+      description: 获取任务详情
+      parameters:
+      - example: 1
+        in: query
+        name: taskId
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetTaskDetailsRsq'
+      summary: 获取任务详情
+      tags:
+      - 任务 相关接口
+  /api/v1/user/captcha:
+    get:
+      description: 获取图片验证码
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_account_web_viewmodels.ResetPasswordReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetCaptchaRsp'
+      summary: 获取图片验证码
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/checkEmailAndPassword:
+    post:
+      consumes:
+      - application/json
+      description: 验证用户名和邮箱
+      parameters:
+      - example: 123456Abc@123
+        in: query
+        name: confirmPassword
+        type: string
+      - example: 123456@qq.com
+        in: query
+        name: email
+        type: string
+      - example: "123456"
+        in: query
+        name: emailCode
+        type: string
+      - example: 123456Abc@123
+        in: query
+        name: password
+        type: string
+      - example: "106268783650461104364"
+        in: query
+        name: sub
+        type: string
+      - example: long
+        in: query
+        name: username
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 验证用户名和邮箱
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/checkUserName:
+    post:
+      consumes:
+      - application/json
+      description: 检测用户名
+      parameters:
+      - example: long
+        in: query
+        name: username
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 检测用户名
+      tags:
+      - 检测用户名 相关接口
+  /api/v1/user/docusign/GetSignUrl:
+    post:
+      consumes:
+      - application/json
+      description: 获取用户内嵌式签名Url
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 获取用户内嵌式签名Url
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/docusign/getAuthUrl:
+    post:
+      consumes:
+      - application/json
+      description: 获取用户内嵌式签名Url
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 获取用户第一次授权URL
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/docusign/getSignStatus:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户签约状态
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 获取用户签约状态
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/docusign/notifyEnvelopeStatus:
+    post:
+      consumes:
+      - application/json
+      description: 通知信封状态
+      parameters:
+      - description: 请求参数
+        in: query
+        name: param
+        required: true
+        type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 通知信封状态
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/docusign/redirectStatus:
+    get:
+      consumes:
+      - application/json
+      description: 保存docusign回调的状态
+      parameters:
+      - example: 61ca23a3-4e5e-486e-a1e0-7e12d136a29d
+        in: query
+        name: envelopeId
+        type: string
+      - example: signing_complete
+        in: query
+        name: event
+        type: string
+      - example: Guoqirong
+        in: query
+        name: userName
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 保存docusign回调的状态
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/docusign/setUserPop:
+    post:
+      consumes:
+      - application/json
+      description: 设置用户弹窗状态
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 设置用户弹窗状态
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/login:
+    post:
+      consumes:
+      - application/json
+      description: 账号登陆
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.LoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.JwtToken'
+      summary: 账号登陆
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/minorCert:
+    post:
+      consumes:
+      - application/json
+      description: 未成年人年龄验证和youtube频道粉丝数验证
+      parameters:
+      - example: "2012-12-23"
+        in: query
+        name: birthday
+        type: string
+      - example: 3
+        in: query
+        name: certType
+        type: integer
+      - description: |-
+          Sub       string `json:"sub" valid:"required~sub is blank" example:"106268783650461104364"`
+          Channel   string `json:"channel" valid:"required~channel is blank" example:"106268783650461104364"`
+        example: Austria
+        in: query
+        name: region
+        type: string
+      - example: Austria
+        in: query
+        name: shortName
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.ResponseMinorCert'
+      summary: 未成年人年龄验证和youtube频道粉丝数验证
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/register:
+    post:
+      consumes:
+      - application/json
+      description: 账号注册
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.RegisterReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 账号注册
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/resetPassword:
+    post:
+      consumes:
+      - application/json
+      description: 密码找回
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_account_web_viewmodels.ResetPasswordReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 密码找回
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/tags:
+    get:
+      description: 获取用户标签
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetUserTagRsp'
+      summary: 获取用户标签
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/verifyEmail:
+    post:
+      consumes:
+      - application/json
+      description: 邮箱校验（传emailCode，则校验邮箱验证码是否正确,不传emailCode 则发送验证码到指定邮箱）
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.VerifyEmailReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 邮箱校验
+      tags:
+      - 账号管理 相关接口
+  /api/v1/user/youtubeLogin:
+    get:
+      consumes:
+      - application/json
+      description: youtube登录绑定
+      parameters:
+      - example: code
+        in: query
+        name: code
+        type: string
+      - description: state=state-token
+        example: 1:long
+        in: query
+        name: state
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: youtube登录绑定
+      tags:
+      - 账号管理 相关接口
+  /api/v1/userInfo/bindGameAccount:
+    post:
+      consumes:
+      - application/json
+      description: 绑定游戏账户
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.BindGameAccountReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 绑定游戏账户
+      tags:
+      - 个人信息 相关接口
+  /api/v1/userInfo/editUserInfo:
+    post:
+      consumes:
+      - application/json
+      description: 修改用户信息
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.EditUserInfoReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 修改用户信息
+      tags:
+      - 个人信息 相关接口
+  /api/v1/userInfo/getGameList:
+    get:
+      consumes:
+      - text/plain
+      description: 获取游戏名称列表
+      parameters:
+      - example: 1
+        in: query
+        name: gameId
+        type: integer
+      - example: en
+        in: query
+        name: language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetGameListRsp'
+      summary: 获取游戏名称列表
+      tags:
+      - 个人信息 相关接口
+  /api/v1/userInfo/getUserInfo:
+    get:
+      consumes:
+      - text/plain
+      description: 获取用户信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetUserInfoRsp'
+      summary: 获取用户信息
+      tags:
+      - 个人信息 相关接口
+  /api/v1/userInfo/getUserLevelInfo:
+    get:
+      consumes:
+      - text/plain
+      description: 获得用户等级信息和下一级信息
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetUserLevelInfoRsp'
+        "302":
+          description: 请求响应
+      summary: 获得用户等级信息
+      tags:
+      - 个人信息 相关接口
+  /api/v1/userInfo/resetPassword:
+    post:
+      consumes:
+      - application/json
+      description: 修改用户密码
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_userinfo_web_viewmodels.ResetPasswordReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 修改用户密码
+      tags:
+      - 个人信息 相关接口
+  /api/v1/userInfo/youtube/oauth/redirect:
+    get:
+      consumes:
+      - text/plain
+      description: 用户认证成功后，youtube 会回调后端接口
+      parameters:
+      - example: code
+        in: query
+        name: code
+        type: string
+      - description: state 里放uid:userName，根据uid和userName确定用户，然后再更新youtube channel信息
+        example: 1:long
+        in: query
+        name: state
+        type: string
+      produces:
+      - text/plain
+      responses:
+        "302":
+          description: 请求响应
+      summary: youtube账号绑定 回调接口
+      tags:
+      - 个人信息 相关接口
+  /api/v2/material/addFavorite:
+    get:
+      consumes:
+      - application/json
+      description: 添加素材至收藏页
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.AddFavoriteReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 添加收藏
+      tags:
+      - 素材库 相关接口
+  /api/v2/material/deleteFavorite:
+    get:
+      consumes:
+      - application/json
+      description: 移除收藏页素材
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.DeleteFavoriteReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/response.Res'
+      summary: 取消收藏
+      tags:
+      - 素材库 相关接口
+  /api/v2/material/favoriteHome:
+    get:
+      consumes:
+      - application/json
+      description: 用户收藏页，展示用户收藏的素材
+      parameters:
+      - example: All
+        in: query
+        name: mateModule
+        type: string
+      - example: All
+        in: query
+        name: mateType
+        type: string
+      - example: 1
+        in: query
+        name: page
+        type: integer
+      - example: 10
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.FavoriteHomeRsp'
+      summary: 用户收藏页
+      tags:
+      - 素材库 相关接口
+  /api/v2/material/mateDownload:
+    post:
+      consumes:
+      - application/json
+      description: 校验权限（素材下载次数权限、单个素材下载次数限制），提供下载链接
+      parameters:
+      - example: 1
+        in: query
+        name: mateId
+        type: integer
+      - example: matePath
+        in: query
+        name: matePath
+        type: string
+      - example: 426aca11-d5bb-4c81-b61c-96da64669ff3
+        in: query
+        name: mateUuid
+        type: string
+      - example: 1.0.0
+        in: query
+        name: mateVersion
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.MateDownloadRsp'
+      summary: 素材下载
+      tags:
+      - 素材库 相关接口
+  /api/v2/material/mateHome:
+    get:
+      consumes:
+      - application/json
+      description: 素材库首页，展示素材信息
+      parameters:
+      - example: All
+        in: query
+        name: mateModule
+        type: string
+      - example: All
+        in: query
+        name: mateType
+        type: string
+      - example: 1
+        in: query
+        name: page
+        type: integer
+      - example: 10
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.MateHomeRsp'
+      summary: 素材库首页
+      tags:
+      - 素材库 相关接口
+  /api/v2/material/typeAndModule:
+    get:
+      description: 获取素材类别/模块列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.GetMaterialTypeAndModuleListRsp'
+      summary: 获取素材类别/模块列表
+      tags:
+      - 素材库 相关接口
+  /api/v2/material/versionDetail:
+    get:
+      consumes:
+      - application/json
+      description: 获取指定版本素材的详情
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.VersionDetailReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.VersionDetailRsp'
+      summary: 版本详情
+      tags:
+      - 素材库 相关接口
+  /api/v2/material/versionList:
+    get:
+      consumes:
+      - application/json
+      description: 获取指定素材的版本列表
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/viewmodels.VersionListReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求响应
+          schema:
+            $ref: '#/definitions/viewmodels.VersionListRsp'
+      summary: 版本列表
+      tags:
+      - 素材库 相关接口
+  /api/v2/task/get_task:
+    post:
+      consumes:
+      - application/json
+      description: Get task content
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/views.RequestGetTask'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            $ref: '#/definitions/views.ResponseGetTask'
+      summary: 获取任务
+      tags:
+      - 任务相关接口 v2
+  /api/v2/task/upload_works:
+    post:
+      consumes:
+      - application/json
+      description: Upload the author works
+      parameters:
+      - description: 请求参数
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/views.RequestUploadWorks'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            $ref: '#/definitions/e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_task_v2_views.ResponseCommon'
+      summary: 上传作者作品
+      tags:
+      - 任务相关接口 v2
+  /api/v2/user/add_channel:
+    post:
+      consumes:
+      - application/json
+      description: Add a channel account to the user
+      parameters:
+      - description: request param
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/views.RequestAddChannel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: request response
+          schema:
+            $ref: '#/definitions/e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_user_v2_views.ResponseCommon'
+      summary: 添加用户渠道账户
+      tags:
+      - Interfaces 用户v2
+  /api/v2/user/delete_channel:
+    post:
+      consumes:
+      - application/json
+      description: Delete a channel account of the user
+      parameters:
+      - description: request param
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/views.RequestDeleteChannel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: request response
+          schema:
+            $ref: '#/definitions/e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_user_v2_views.ResponseCommon'
+      summary: 删除用户渠道账户
+      tags:
+      - Interfaces 用户v2
+  /api/v2/user/get_channels_list:
+    post:
+      consumes:
+      - application/json
+      description: Get channels list of the user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: request response
+          schema:
+            items:
+              $ref: '#/definitions/views.ResponseGetChannelsList'
+            type: array
+      summary: 获取用户渠道账户列表
+      tags:
+      - Interfaces 用户v2
+  /api/v2/user/get_primary_channel_status:
+    post:
+      consumes:
+      - application/json
+      description: get the statue of the primary channel set by the user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: request response
+          schema:
+            $ref: '#/definitions/views.ResponseGetPrimaryChannelStatus'
+      summary: 获取用户设置主渠道账户状态
+      tags:
+      - Interfaces 用户v2
+  /api/v2/user/set_primary_channel:
+    post:
+      consumes:
+      - application/json
+      description: set the primary channel status of the user
+      parameters:
+      - description: request param
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/views.RequestSetPrimaryChannel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: request response
+          schema:
+            $ref: '#/definitions/e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_user_v2_views.ResponseCommon'
+      summary: 设置用户主渠道账户
+      tags:
+      - Interfaces 用户v2
+  /api/v2/user/update_channel:
+    post:
+      consumes:
+      - application/json
+      description: Update a channel account to the user
+      parameters:
+      - description: request param
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/views.RequestUpdateChannel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: request response
+          schema:
+            $ref: '#/definitions/e.coding.intlgame.com_ptc_GameContentCreatorPlatform_streamer_system_user_v2_views.ResponseCommon'
+      summary: 更新用户渠道账户(只能更新审核失败的渠道账户)
+      tags:
+      - Interfaces 用户v2
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

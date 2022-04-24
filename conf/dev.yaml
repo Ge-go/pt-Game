@@ -1,0 +1,143 @@
+App:
+  Name: streamer_system                      # API Server的名字
+  InstantKey: streamer_system_1             # 同一个服务在同一个Environment下可能部署了多套时，就用该字段区分
+  Addr: :9000                              # HTTP绑定端口
+  RunMode: test                           # 开发模式, dev, release, test
+  UseSwagger: true                       # 是否开启swagger, true，false
+  JwtSecret: Rtg8BPKNEf2mB4mgvKONGPZZQSaJWNLijxR42qRgq0iBb5
+  JwtExpire: 604800        # 小时
+Log:
+  Writers: file,stdout            # 有2个可选项：file,stdout, 可以两者同时选择输出位置，有2个可选项：file,stdout。选择file会将日志记录到logger_file指定的日志文件中，选择stdout会将日志输出到标准输出，当然也可以两者同时选择
+  LoggerLevel: DEBUG             # 日志级别，DEBUG, INFO, WARN, ERROR, FATAL
+  LoggerFile: log/logic.log   # 日志文件
+  LogFormatText: false          # 日志的输出格式，json或者plaintext，true会输出成plaintext格式，false会输出成json格式
+  LogRollingPolicy: size      # rotate依据，可选的有：daily,size
+  LogRotateDate: 1              # rotate转存时间，配合rollingPolicy: daily使用
+  LogRotateSize: 1              # rotate转存大小，配合rollingPolicy: size使用，单位：Mb
+  LogBackupCount: 7             # 当日志文件达到转存标准时，log系统会将该日志文件进行压缩备份，这里指定了备份文件的最大个数。
+
+Mysql:
+  Default:
+    Name: aov_streamer_admin_system
+    Addr: 127.0.0.1:3306 # 如果是 docker,可以替换为 对应的服务名称，eg: db:3306
+    Username: root
+    Password: root
+    ShowLog: true                  # 是否打印SQL日志
+    MaxIdleConn: 200               # 最大闲置的连接数
+    MaxOpenConn: 900               # 最大打开的连接数
+    ConnMaxLifeTime: 60          # 连接重用的最大时间，单位分钟
+  Material:
+    Name: aov_streamer_admin_material    # db name
+    Addr: 127.0.0.1:3306           # db 地址
+    Username: root                 # 用户名
+    Password: root                 # 密码
+    ShowLog: true                  # 是否打印SQL日志
+    MaxIdleConn: 200               # 最大闲置的连接数
+    MaxOpenConn: 900               # 最大打开的连接数
+    ConnMaxLifeTime: 60          # 连接重用的最大时间，单位分钟
+Redis:
+  Default:
+    Addr: "127.0.0.1:6379"
+    Password: "" # no password set
+    Db: 0 # use default DB
+    DialTimeout: 5s
+    ReadTimeout: 3s
+    WriteTimeout: 3s
+    PoolSize: 15000
+    PoolTimeOut: 4s
+#  GCP配置
+GCP:
+  CDN: https://creatorhub-storage.intlgame.com/
+  KeyName: creatorhub11
+  Key: 0PFhNJeQNN3b8-IXGrK1uQ==
+
+EmailAPI: # 发送邮箱API配置
+  Domain: test.intlgame.com
+  Uri: /v2/transmit/email
+  GameId: 11
+  Sigkey: sigkey
+  ChannelId: 1
+  Source: 0
+OAuth:
+  Youtube: # youtube账号绑定的配置
+    AuthUrl: https://accounts.google.com/o/oauth2/auth  # oauth认证网关
+    TokenUrl: https://oauth2.googleapis.com/token       # 用code 换取access token的网关
+    RedirectUri: https://aov-test.creatorhuub.com/api/v1/userInfo/youtube/oauth/redirect   # 后端重定向uri
+    ClientId: 484635537955-tvs39tpkbirvtjse73epsmgm5doknjq0.apps.googleusercontent.com  # client id
+    ClientSecret: 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                                              # client secret
+    LoginRedirectUri: https://aov-test.creatorhuub.com/home/signmiddle
+    YoutubeMinFans: 0 #youtube MIN FANS
+ContentModeration: #内容审核
+  Domain: dev.intlgame.com
+  Uri: /v1/sec/contentmoderation/uic
+  Appkey: itopsigkey
+  Appid: app1
+  Gameid: 7
+  BusiheadAppkey: key1
+  BusiheadServicename: service1
+Docusign:
+  Env: demo
+  # The public key of the docusign
+  PublicKey: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqpfdDVhuIU5U8cDF/zpJ
+    Swv0dTapJ6n57XpjPJW8T4am98iSmgf/aYfz1c5qyMMvHk1oi2COkOnPuvOhd+ty
+    UGjIT9sXHQzphUcOhDqQIY2Gt+zCnpthgxybwmWwdmiZL7Al39BuK8O9/o4HKafD
+    9SOpTvX2reJwZXrqsccMi6BnqHSp1uYtW57ebkCYYbjzFklBKIMuaYF4+qcEXxeu
+    03FM6eHdj7+HaMK5kLU1PjdRjUQ8TIqpsEucOR3rPYBvAK50n4PBE/wW12+G8yV5
+    YVstC42hcQb9xyuSfH2Ls3r2C/yqOuqLNd2bbE1sQW/1AJAwIjBtAGw6c+JLc+SH
+    AwIDAQAB
+    -----END PUBLIC KEY-----
+  # The private key of the docusign
+  PrivateKey: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEpQIBAAKCAQEAlaLy5itF7LBvWUmzCdebPML4roFy2Cpl4SMt2Udf2ZqF1AjZ
+    z8jJmplUtnMinqWLlJFxEGLgtmuOdfiIGYWFR3Djz8lMNr5bpy1Z9e2lkfmn2phH
+    tLm/DlsOTtQv94Dk9MB56msz0iuBD+qIErrW7fLvKh8vGjgElmausZhZ2wcdp3ZJ
+    FMvC+tP7XrqZEkmTusYLLaH1uJKgMo5Q/hSOZrVUNId80Px9h5Kpfae1UnecIpLr
+    clV7CDM0XD5rfSACZ9fJPqXPZ3rkG3L4jYJ9cbVfyyO1w621O1rd9c2w8D4zLr5I
+    D/Axg4wTDw14n27yzD18vDEjAJz3HRLSHad0twIDAQABAoIBAAHQrzehkMCVR1SC
+    81wMNILhLpkXUuhSY1f+0ECRgBUorbTrwpCls+RfNcrczK+1/GJ5/TAgsu8jkN/X
+    evcsSniaYvkTTQxg9MWrZCr6jgaeS634KO6FTk8DRcIpCsfq1VwutYvlbwR+qJsj
+    0jC/+Xl7d/E/3Zdo1I1qg3X+DiD9CUUOMwCNFZFlq8ezbIt0CG/xzpdA6fREr70u
+    ON0Fzgt7LN/ekMlPxvFhlfRsJTOYVdpQQ2VFQ8wB/Jxv/oVix/p79Y/xbErpc+rE
+    S1aa/bx68zM0hoKUwN2ZSG0uo8MDtHJmkytO2SoZrucUJKAgnDnUy+jxStu1x98A
+    g1lB9lECgYEA7g9nXVmea5ZchLl2kYZN+cfPMYCUo+orGMkrHZDIpU7NAtWMx6cc
+    2H6c2aHAwAkGNYOUJokxKPaQGg4N58EukupIShdUUq9rnt6HjsiZ2Zo1nLp+b5/p
+    ZEqJt6joZ9ii1o5AO+yJVcjWYxSjawdWLmLbrYFU/aB6p3C4TmIZkb8CgYEAoOmy
+    zoInL07QmpdafcPTtQFgTEr/Z/dqbLo5pamepWDu9zFvEKeZXSza+go9YOw1XMBy
+    dyI/WRC9oWoCeurcELu6oaPxISjYlVkwSj6F/n9eYCg9rXixfuAGRgekQcwbDWC6
+    FIxfTMW1CtzGPnP0losvqKwkqbjNwbxUmv3J6wkCgYEArluZ2UVKQoJeQNeVgABe
+    HBO8LQV/2I4qAn1UltL0Ih8VCH5gHdrHxcj2GG/gPMZfRdKZL6BL4TS1Vl/0z0ku
+    U2xEhf+QQv84U6OopWtHQ5kuqxvsftUgm9P8CggsL+L7YSnO4hTcgXgXjXoQNtOo
+    y1CclPekyB5Bt2FXnBE9qQECgYEAkES3AZuDklCxisjEYxmdyB0xv3VGRGp5Sn40
+    jSjkihW8angxwdbiE73Rnnhry2g796q7dcCI10vBGOU40Aedwortq1qXKEm81Tof
+    p5EjBaggb0nk8pDRYpVsSoEzbaKXZokgjKfGEcj4poKGYxwHYKnt0uZ0AI8mOtql
+    aEi+LjECgYEA10UXcEERfQ8yWH4q6BZ6CETebWaQxANA5g3U20bpbXwCaQ5BhUVw
+    LFL7ucxdbyoueHPvyUtqdBRjQ27TsO1UTMekoHvlyjwzuFEh8O1GmQ1GDDK60yj9
+    8Yvbw++JDVr7Pat+BXpfOJsTFIV4GvV3TGXyeySYRo8TRnwDcG7bkrM=
+    -----END RSA PRIVATE KEY-----
+  ClientId: fde3e4fc-322a-49cf-8167-08709a053f1c
+  RedirectUri: https://pubgmobile.creatorhuub.com/home/docusignmiddle
+  WebhookUri: https://pubgmobile.creatorhuub.com/api/v1/user/docusign/notifyEnvelopeStatus
+  Sub: f385711f-9bb5-4cfe-818e-21a8f2c02b03
+  TemplateId:
+    cn: 82cbb661-f9e0-4c38-a3a0-48318c7c116f    #cn简体中文
+    cnh: 6c061fae-084a-4657-9ee8-7325c3c4b3d2   #cnh繁体中文（香港）
+    cnt: 6c061fae-084a-4657-9ee8-7325c3c4b3d2   #cnt繁体中文（台湾）
+    yu: 3947ccb5-ef30-42ed-bf73-e2e14af7cfb1    #yu越南语
+    tu: 7ab63672-d3e7-4b0b-a4d8-257fa551676e    #tu土耳其语
+    ta: 04100835-29f6-4237-bffa-be065ad1aaa1    #ta泰语
+    py: 1a91fa82-bdf1-4afc-b8dc-a352354461e4    #py俄语
+    po: 5b3ca281-adeb-4f64-9a77-8a5a3a42a1c2    #po葡萄牙语（葡萄牙）
+    ma: 5e239998-0106-4353-95ff-a09157df642c    #ma马来语（马来西亚）
+    in: 0e3425da-e2c8-4dd7-90a7-93956632e49a    #in印尼语
+    fr: e46faa6b-5670-4ec7-9b65-0181329fa964    #fr法语
+    es: 5d33852d-ad35-4620-845c-dc619e0aaa16    #es西班牙语（西班牙）
+    en: ae421f70-4731-4619-943c-99e8437f80ee    #en英语
+    de: 6f6d4395-01c0-4825-bef6-270101ce7fcf    #de德语
+    ar: 53a8f754-7f58-4830-89ca-92a99105cb85    #ar阿拉伯语
+    #us 美国区域|sg 新加坡区域|ru 俄罗斯区域|eu 欧洲区域
+  ClientRegion: sg
+  ConnectKey: lVk6ShQ5d6n57WQXRoj9e0QAqcnzsMQBwj+e4j3ozLU=
+WhiteList: [ "jingshenwei93@gmail.com","382533537@qq.com","sarahkim@krafton.com","787482984@qq.com","2834964850@qq.com" ]
