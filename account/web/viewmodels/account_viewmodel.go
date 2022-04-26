@@ -9,6 +9,38 @@ type RegisterReq struct {
 	IsEuropean int    `json:"is_european" valid:"optional,in(0|1)" example:"1"` //勾选协议
 }
 
+// POST: /api/v1/user/verifyEmail
+type VerifyEmailReq struct {
+	Email     string `json:"email" valid:"required~email is blank,email" example:"1254@qq.com"`
+	EmailCode string `json:"emailCode" valid:"optional,numeric,minstringlength(6)~email code must be 6-digit code" example:"123456"`
+}
+
+type VerifyEmailRsp struct {
+	EmailCode string `json:"emailCode"`
+}
+
+type JwtToken struct {
+	Token    string `json:"token"`
+	UserName string `json:"userName"`
+	IsLocked int    `json:"isLocked"`
+}
+
+// POST: /api/v1/user/Login
+type LoginReq struct {
+	Email        string `json:"email" valid:"required,email" example:"821230693@qq.com"`
+	Password     string `json:"password" valid:"required,minstringlength(1),maxstringlength(30)" example:"123456Abc@123"`
+	CaptchaId    string `json:"captcha_id" valid:"required" example:"1"`
+	CaptchaValue string `json:"captcha_value" valid:"required" example:"xxx"`
+}
+
+// POST: /api/v1/user/resetPassword
+type ResetPasswordReq struct {
+	Email           string `json:"email" valid:"required~email is blank,email" example:"1254@qq.com"`
+	EmailCode       string `json:"emailCode" valid:"required~emailCode is blank,numeric,minstringlength(6)~email code must be 6-digit code" example:"123456"`
+	Password        string `json:"password" valid:"required~password is blank,minstringlength(8),maxstringlength(30)" example:"123456Abc@123"`
+	ConfirmPassword string `json:"confirmPassword" valid:"required~confirmPassword is blank,minstringlength(8),maxstringlength(30)" example:"123456Abc@123"`
+}
+
 //POST register step 1
 type MinorLimitReq struct {
 	ShortName string `json:"shortName" valid:"required~shortName is blank" example:"Austria"`

@@ -82,6 +82,7 @@ func (this *App) newAPiServer(config *config.Config) *iris.Application {
 	app.Logger().Info(fmt.Sprintf(`Log level set to "%s"`, logLevel))
 
 	ac := accesslog.GetAccessLog(config.App.Name, config.App.RunMode, config.App.InstantKey)
+
 	app.ConfigureHost(func(su *host.Supervisor) {
 		su.RegisterOnShutdown(
 			func() {

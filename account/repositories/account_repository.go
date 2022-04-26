@@ -260,5 +260,5 @@ func (a *accountRepository) GetAuthorLevel(ctx context.Context, fans int) ([]str
 }
 
 func (a *accountRepository) UserLoginRecord(userId int) {
-	//panic("implement me")
+	a.db.Exec("INSERT INTO streamer_user_operation_record (user_id,type,time) VALUES (?,?,?)", userId, 1, time.Now().Unix())
 }

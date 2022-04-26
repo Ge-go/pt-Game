@@ -16,7 +16,8 @@ const (
 	 *	 400002 (Verification code error)
 	 *	 400003 (The password contains at least numbers and letters, but the length is between 8 and 20 digits)
 	 */
-	DifferentPassword = 400004 //密码不一致
+	DifferentPassword = 400004  //密码不一致
+	ErrInvalidParam   = 4000005 //invalidate param
 
 	ErrEmailHasExisted = 400010 //邮箱已经存在
 	RegisteredTask     = 400011 // 已报名任务
@@ -119,6 +120,9 @@ const (
 )
 
 var ConfigMessage = map[int]map[string]string{
+	ErrInvalidParam: {
+		"zh": "参数错误!",
+	},
 	TheTaskHasExpired: map[string]string{
 		"zh": "任务已过期!",
 	},

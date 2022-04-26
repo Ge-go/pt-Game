@@ -8,17 +8,17 @@ import (
 	"log"
 )
 
-var conf = new(Config)
+var Conf = new(Config)
 
 func Init(path string) (*Config, error) {
 	//默认使用dev.yaml配置文件
 	if path == "" {
-		viper.AddConfigPath("./conf")
+		viper.AddConfigPath("./Conf")
 		viper.SetConfigName("dev")
 		viper.SetConfigType("yaml")
 	} else {
 		//parse指定yaml
-		viper.SetConfigFile(fmt.Sprintf("conf/%s", path))
+		viper.SetConfigFile(fmt.Sprintf("Conf/%s", path))
 	}
 
 	//加载配置
@@ -27,7 +27,7 @@ func Init(path string) (*Config, error) {
 	}
 
 	//解析
-	if err := viper.Unmarshal(conf); err != nil {
+	if err := viper.Unmarshal(Conf); err != nil {
 		return nil, errors.Wrapf(err, "faild to load config")
 	}
 
@@ -36,9 +36,9 @@ func Init(path string) (*Config, error) {
 	viper.OnConfigChange(func(in fsnotify.Event) {
 		log.Println("config file changed:", in.Name)
 	})
-	return conf, nil
+	return Conf, nil
 }
 
 func GetConfig() *Config {
-	return conf
+	return Conf
 }

@@ -91,7 +91,8 @@ func (a *AccountController) MinorCert(c iris.Context) {
 	var minorLimitReq viewmodels.MinorLimitReq
 	if err := c.ReadJSON(&minorLimitReq); err != nil {
 		logiclog.CtxLogger(c).Warnf("[MinorCert] required code parameter: %+v", err)
-		response.Send(c, err, nil)
+		response.Send(c, response.GetMessage(response.ErrInvalidParam, conf.ZH), nil)
+		return
 	}
 
 	//验证数据
@@ -134,4 +135,157 @@ func (a *AccountController) MinorCert(c iris.Context) {
 	response.Send(c, nil, data)
 
 	return
+}
+
+// @Tags 账号管理 相关接口
+// @Summary 邮箱校验
+// @Description 邮箱校验（传emailCode，则校验邮箱验证码是否正确,不传emailCode 则发送验证码到指定邮箱）
+// @Router /api/v1/user/verifyEmail [post]
+// @Accept json
+// @Produce json
+// @Param param body viewmodels.VerifyEmailReq true "请求参数"
+// @Success 200 {object} response.Res "请求响应"
+func (a *AccountController) VerifyEmail(c iris.Context) {
+	// bind param
+	var req viewmodels.VerifyEmailReq
+	if err := c.ReadJSON(&req); err != nil {
+		logiclog.CtxLogger(c).Warnf("invalid param err:(%+v)", err)
+		response.Send(c, response.GetMessage(response.ErrInvalidParam, conf.ZH), nil)
+		return
+	}
+	// validate param
+	_, err := govalidator.ValidateStruct(req)
+	if err != nil {
+		logiclog.CtxLogger(c).Warnf("param validate err:(%+v)", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	//verify email code if not empty
+	if req.EmailCode != "" {
+		isOk, verifyErr := a.Service.VerifyEmailCode(c.Request().Context(), req.Email, req.EmailCode)
+		if verifyErr != nil {
+			logiclog.CtxLogger(c).Warnf("param validate err:(%+v)", verifyErr)
+			response.Send(c, verifyErr, nil)
+			return
+		}
+		if !isOk {
+			response.Send(c, response.GetMessage(response.ErrEmailCode, conf.ZH), nil)
+			return
+		}
+
+		response.Send(c, nil, nil)
+		return
+	}
+
+	_, err = a.Service.SendEmail(c.Request().Context(), req)
+	if err != nil {
+		logiclog.CtxLogger(c).Errorf("service err: (%+v)", err)
+		response.Send(c, err, nil)
+	}
+	response.Send(c, nil, nil)
+}
+
+// @Tags 账号管理 相关接口
+// @Summary 账号登陆
+// @Description 账号登陆
+// @Router /api/v1/user/login [post]
+// @Accept json
+// @Produce json
+// @Param param body viewmodels.LoginReq true "请求参数"
+// @Success 200 {object} viewmodels.JwtToken "请求响应"
+func (a *AccountController) Login(context iris.Context) {
+	// bind param
+	var req viewmodels.LoginReq
+	if err := context.ReadJSON(&req); err != nil {
+		logiclog.CtxLogger(context).Warnf("bind err:(%+v)", err)
+		response.Send(context, err, nil)
+		return
+	}
+
+	_, err := govalidator.ValidateStruct(req)
+	if err != nil {
+		logiclog.CtxLogger(context).Warnf("param validate err:(%+v)", err)
+		response.Send(context, err, nil)
+		return
+	}
+
+	data, err := a.Service.Login(context.Request().Context(), req)
+	if err != nil {
+		logiclog.CtxLogger(context).Errorf("service err: (%+v)", err)
+		response.Send(context, err, nil)
+		return
+	}
+
+	if data.IsLocked == 1 {
+		response.Send(context, response.GetMessage(response.AccountHasBeenFrozen, conf.ZH), nil)
+		return
+	}
+
+	response.Send(context, nil, data)
+}
+
+// @Tags 账号管理 相关接口
+// @Summary 密码找回
+// @Description 密码找回
+// @Router /api/v1/user/resetPassword [post]
+// @Accept json
+// @Produce json
+// @Param param body viewmodels.ResetPasswordReq true "请求参数"
+// @Success 200 {object} response.Res "请求响应"
+func (a *AccountController) ResetPassword(context iris.Context) {
+	//bind para
+	var req viewmodels.ResetPasswordReq
+	if err := context.ReadJSON(&req); err != nil {
+		logiclog.CtxLogger(context).Warnf("bind err:(%+v)", err)
+		response.Send(context, err, nil)
+		return
+	}
+
+	_, err := govalidator.ValidateStruct(req)
+	if err != nil {
+		logiclog.CtxLogger(context).Warnf("param validate err:(%+v)", err)
+		response.Send(context, err, nil)
+		return
+	}
+
+	//confirm that twice password was the same
+	if req.Password != req.ConfirmPassword {
+		response.Send(context, response.GetMessage(response.DifferentPassword, conf.ZH), nil)
+		return
+	}
+
+	//验证邮箱
+	ok, err := a.Service.VerifyEmailCode(context.Request().Context(), req.Email, req.EmailCode)
+	if err != nil {
+		logiclog.CtxLogger(context).Warnf("service err:(%+v)", err)
+		response.Send(context, err, nil)
+		return
+	}
+
+	if !ok {
+		response.Send(context, response.GetMessage(response.ErrEmailCode, conf.ZH), nil)
+		return
+	}
+
+	//邮箱是否注册了
+	ok, err = a.Service.IsEmailExist(context.Request().Context(), req.Email)
+	if err != nil {
+		logiclog.CtxLogger(context).Warnf("service err:(%+v)", err)
+		response.Send(context, err, nil)
+		return
+	}
+	if !ok {
+		response.Send(context, response.GetMessage(response.ErrEmailHasExisted, conf.ZH), nil)
+		return
+	}
+
+	// reset password
+	err = a.Service.ResetPassword(context.Request().Context(), req)
+	if err != nil {
+		logiclog.CtxLogger(context).Errorf(" service err: (%+v)", err)
+		response.Send(context, err, nil)
+		return
+	}
+	response.Send(context, nil, nil)
 }

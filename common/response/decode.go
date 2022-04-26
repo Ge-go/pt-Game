@@ -13,6 +13,7 @@ var (
 	ErrBadRequest          = &ErrorNo{HTTPStatusCode: http.StatusBadRequest, ServiceCode: 400000, Message: "Bad Request"}
 	ErrUnauthorized        = &ErrorNo{HTTPStatusCode: http.StatusUnauthorized, ServiceCode: 400001, Message: "Unauthorized"}
 	ErrForbidden           = &ErrorNo{HTTPStatusCode: http.StatusForbidden, ServiceCode: 400003, Message: "Forbidden"}
+	//ErrInvalidParam        = &ErrorNo{HTTPStatusCode: http.StatusBadRequest, ServiceCode: 400003, Message: "Invalid Param"}
 
 	//StatusBadRequest
 	ErrInvalidCaptcha = &ErrorNo{HTTPStatusCode: http.StatusBadRequest, ServiceCode: 400002, Message: "Invalid Captcha"}

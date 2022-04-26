@@ -3,10 +3,14 @@ package services
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/pkg/errors"
 	"ptc-Game/account/repositories"
 	"ptc-Game/account/web/viewmodels"
 	"ptc-Game/common/pkg/captcha"
+	"ptc-Game/common/pkg/email"
+	"ptc-Game/common/response"
+	"ptc-Game/common/util"
 	"time"
 )
 
@@ -15,6 +19,11 @@ type AccountService interface {
 	Register(ctx context.Context, data viewmodels.RegisterInfo) error
 	MinorCert(ctx context.Context, req viewmodels.MinorLimitReq) (*viewmodels.MinorLimitRsp, error)
 	SaveRegisterInfo(ctx context.Context, info viewmodels.RegisterInfo) error
+	VerifyEmailCode(ctx context.Context, email, emailCode string) (bool, error)
+	SendEmail(ctx context.Context, req viewmodels.VerifyEmailReq) (*viewmodels.VerifyEmailRsp, error)
+	Login(ctx context.Context, data viewmodels.LoginReq) (*viewmodels.JwtToken, error)
+	IsEmailExist(ctx context.Context, email string) (bool, error)
+	ResetPassword(ctx context.Context, req viewmodels.ResetPasswordReq) error
 }
 
 func NewAccountService(repo repositories.AccountRepository) AccountService {
@@ -27,6 +36,78 @@ func NewAccountService(repo repositories.AccountRepository) AccountService {
 type accountService struct {
 	repo       repositories.AccountRepository
 	CaptchaSvc captcha.Captcha
+}
+
+func (a *accountService) ResetPassword(ctx context.Context, req viewmodels.ResetPasswordReq) error {
+	hashPassword, err := util.GenHashPassword(req.Password)
+	if err != nil {
+		return err
+	}
+	return a.repo.ResetPassword(ctx, req.Email, hashPassword)
+}
+
+func (a *accountService) IsEmailExist(ctx context.Context, email string) (bool, error) {
+	return a.repo.IsEmailExist(ctx, email)
+}
+
+func (a *accountService) Login(ctx context.Context, data viewmodels.LoginReq) (*viewmodels.JwtToken, error) {
+	// verify captcha 存在redis,这样可以支持集群
+	val, err := a.repo.GetCaptcha(ctx, data.CaptchaId)
+
+	if err != nil || val != data.CaptchaValue {
+		return nil, response.ErrInvalidCaptcha
+	}
+
+	user, err := a.repo.FindByEmail(ctx, data.Email)
+	if err != nil {
+		return nil, response.ErrInvalidPassword
+	}
+
+	// compare with user submit
+	if !util.MatchPassword(data.Password, user.Password) {
+		return nil, response.ErrInvalidPassword
+	}
+
+	// account has been locked
+	if user.IsLocked == 1 {
+		return &viewmodels.JwtToken{IsLocked: user.IsLocked}, nil
+	}
+
+	// put necessar user info to jwt payload
+	payload := map[string]interface{}{"uid": user.Id, "region": user.Region}
+
+	// sign jwt token
+	token, err := util.SignJwtToken(payload)
+	if err != nil {
+		return nil, err
+	}
+
+	a.repo.UserLoginRecord(user.Id)
+
+	return &viewmodels.JwtToken{Token: token, UserName: user.UserName}, nil
+}
+
+func (a *accountService) SendEmail(ctx context.Context, req viewmodels.VerifyEmailReq) (*viewmodels.VerifyEmailRsp, error) {
+	randomDigit := util.RandomDigit()
+	fmt.Println(randomDigit)
+	err := a.repo.StoreEmailCode(ctx, req.Email, randomDigit)
+	if err != nil {
+		return nil, err
+	}
+
+	// send email to user
+	subject := "Please verify your email"
+	emailTemplate := fmt.Sprintf(`Your code verificationcode is: %v`, randomDigit)
+	err = email.SendEmail(ctx, req.Email, subject, emailTemplate)
+	if err != nil {
+		return nil, err
+	}
+
+	return &viewmodels.VerifyEmailRsp{EmailCode: randomDigit}, nil
+}
+
+func (a *accountService) VerifyEmailCode(ctx context.Context, email, emailCode string) (bool, error) {
+	return a.repo.VerifyEmailCode(ctx, email, emailCode)
 }
 
 func (a *accountService) SaveRegisterInfo(ctx context.Context, info viewmodels.RegisterInfo) error {

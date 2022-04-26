@@ -19,6 +19,9 @@ func Account(app *mvc.Application) {
 
 	// 账号管理
 	app.Router.Post("/register", accountContrl.Register).Name = "注册"
+	app.Router.Post("/verifyEmail", accountContrl.VerifyEmail).Name = "邮箱校验"
+	app.Router.Post("/login", accountContrl.Login).Name = "账号登录"
+	app.Router.Post("/resetPassword", accountContrl.ResetPassword).Name = "密码找回"
 	app.Router.Post("/minorCert", accountContrl.MinorCert).Name = "未成年人注册"
 
 	//初始化docusign控制器
