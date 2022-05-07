@@ -24,6 +24,8 @@ type AccountService interface {
 	Login(ctx context.Context, data viewmodels.LoginReq) (*viewmodels.JwtToken, error)
 	IsEmailExist(ctx context.Context, email string) (bool, error)
 	ResetPassword(ctx context.Context, req viewmodels.ResetPasswordReq) error
+	GetCaptcha(ctx context.Context) (*viewmodels.GetCaptchaRsp, error)
+	GetUserTag(ctx context.Context) (*viewmodels.GetUserTagRsp, error)
 }
 
 func NewAccountService(repo repositories.AccountRepository) AccountService {
@@ -36,6 +38,27 @@ func NewAccountService(repo repositories.AccountRepository) AccountService {
 type accountService struct {
 	repo       repositories.AccountRepository
 	CaptchaSvc captcha.Captcha
+}
+
+func (a *accountService) GetUserTag(ctx context.Context) (*viewmodels.GetUserTagRsp, error) {
+	tagList, err := a.repo.GetTagList(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &viewmodels.GetUserTagRsp{TagList: tagList}, nil
+}
+
+func (a *accountService) GetCaptcha(ctx context.Context) (*viewmodels.GetCaptchaRsp, error) {
+	id, content, bs64, err := a.CaptchaSvc.Generate()
+	if err != nil {
+		return nil, err
+	}
+	data := &viewmodels.GetCaptchaRsp{
+		Id:     id,
+		Base64: bs64,
+	}
+	err = a.repo.SetCaptcha(ctx, id, content) // 存储redis 支持集群
+	return data, err
 }
 
 func (a *accountService) ResetPassword(ctx context.Context, req viewmodels.ResetPasswordReq) error {

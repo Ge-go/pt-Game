@@ -41,6 +41,42 @@ type ResetPasswordReq struct {
 	ConfirmPassword string `json:"confirmPassword" valid:"required~confirmPassword is blank,minstringlength(8),maxstringlength(30)" example:"123456Abc@123"`
 }
 
+//google jwt token
+type JwtGoogleClaims struct {
+	Iss           string `json:"iss"`
+	Azp           string `json:"azp"`
+	Aud           string `json:"aud"`
+	Sub           string `json:"sub"`
+	Hd            string `json:"hd"`
+	Email         string `json:"email"`
+	EmailVerified bool   `json:"email_verified"`
+	AtHash        string `json:"at_hash"`
+	Nonce         string `json:"nonce"`
+	Iat           int    `json:"iat"`
+	Exp           int    `json:"exp"`
+}
+
+type JwtGoogleCallback struct {
+	Email string `json:"email"`
+	Sub   string `json:"sub"`
+}
+
+// GET: /api/v1/user/captcha
+type GetCaptchaRsp struct {
+	Id     string `json:"id"`
+	Base64 string `json:"base64"`
+}
+
+// GET:/api/v1/user/tags
+type GetUserTagRsp struct {
+	TagList []UserTag `json:"tagList"`
+}
+
+type GoogleCallbackReq struct {
+	Code  string `json:"code" valid:"required~code is blank" example:"code"`
+	State string `json:"state" valid:"required~state is blank" example:"1:long"` // state=state-token
+}
+
 //POST register step 1
 type MinorLimitReq struct {
 	ShortName string `json:"shortName" valid:"required~shortName is blank" example:"Austria"`

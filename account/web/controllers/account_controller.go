@@ -1,10 +1,13 @@
 package controllers
 
 import (
+	"errors"
 	"github.com/asaskevich/govalidator"
 	"github.com/go-redis/redis"
 	"github.com/google/uuid"
 	"github.com/kataras/iris/v12"
+	"google.golang.org/api/youtube/v3"
+	"gorm.io/gorm"
 	"ptc-Game/account/services"
 	"ptc-Game/account/web/viewmodels"
 	"ptc-Game/common/conf"
@@ -288,4 +291,165 @@ func (a *AccountController) ResetPassword(context iris.Context) {
 		return
 	}
 	response.Send(context, nil, nil)
+}
+
+func (a *AccountController) GetCaptcha(c iris.Context) {
+	// generate base64 captcha
+	data, err := a.Service.GetCaptcha(c.Request().Context())
+	if err != nil {
+		logiclog.CtxLogger(c).Errorf("service err: %+v", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	response.Send(c, nil, data)
+}
+
+// GetUserTag
+// @Tags 账号管理 相关接口
+// @Summary 获取用户标签
+// @Description 获取用户标签
+// @Router /api/v1/user/tags [get]
+// @Produce json
+// @Success 200 {object} viewmodels.GetUserTagRsp "请求响应"
+func (a *AccountController) GetUserTag(c iris.Context) {
+	data, err := a.Service.GetUserTag(c.Request().Context())
+	if err != nil {
+		logiclog.CtxLogger(c).Errorf("service err: (%+v)", err)
+		response.Send(c, err, nil)
+		return
+	}
+	response.Send(c, nil, data)
+}
+
+// YoutubeLogin
+// @Tags 账号管理 相关接口
+// @Summary youtube登录绑定
+// @Description youtube登录绑定
+// @Router /api/v1/user/youtubeLogin [get]
+// @Accept json
+// @Produce json
+// @Param param query viewmodels.GoogleCallbackReq true "请求参数"
+// @Success 200 {object} response.Res "请求响应"
+func (a *AccountController) YoutubeLogin(c iris.Context) {
+	var callbackReq viewmodels.GoogleCallbackReq
+
+	if err := c.ReadQuery(&callbackReq); err != nil {
+		logiclog.CtxLogger(c).Warnf("[YoutubeLogin] required code parameter: %+v", err)
+		response.Send(c, err, nil)
+		return
+	}
+	//验证数据
+	_, err := govalidator.ValidateStruct(callbackReq)
+	if err != nil {
+		logiclog.CtxLogger(c).Warnf("[YoutubeLogin] param validate err:(%+v)", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	config := a.YoutubeService.GetGoogleConfig([]string{"openid", "email", youtube.YoutubeReadonlyScope})
+
+	//根据callback code 获取token
+	token, err := config.Exchange(c.Request().Context(), callbackReq.Code)
+	if err != nil {
+		logiclog.CtxLogger(c).Warnf("[YoutubeLogin] failed to retrieve youtube api token: %+v", err)
+		response.Send(c, response.GetMessage(response.NoYoutubeAuth, conf.EN), nil)
+		return
+	}
+	//根据token 获取 JwtGoogleClaims
+	tokenStruct, err := a.YoutubeService.GetJwtGoogleClaims(token)
+	if err != nil {
+		logiclog.CtxLogger(c).Warnf("[YoutubeLogin] failed to get JwtGoogleClaims: %+v", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	//进行登录
+	data, err := a.YoutubeService.GoogleLogin(c.Request().Context(), tokenStruct.Sub)
+
+	if errors.Is(err, gorm.ErrRecordNotFound) { //要存储token
+		a.YoutubeService.CacheGoogleToken(c.Request().Context(), tokenStruct.Sub, token)
+		response.Send(c, response.GetMessage(response.NoBindingYoutubeAccount, conf.EN), viewmodels.JwtGoogleCallback{
+			Sub:   tokenStruct.Sub,
+			Email: tokenStruct.Email,
+		})
+		return
+	}
+	//其他错误
+	if err != nil {
+		logiclog.CtxLogger(c).Errorf("[YoutubeLogin] service err: (%+v)", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	//账号已锁定
+	if data.IsLocked == 1 {
+		response.Send(c, response.GetMessage(response.AccountHasBeenFrozen, conf.EN), nil)
+		return
+	}
+
+	response.Send(c, nil, data)
+	return
+}
+
+//CheckEmailAndPassword
+// @Tags 账号管理 相关接口
+// @Summary 验证用户名和邮箱
+// @Description 验证用户名和邮箱
+// @Router /api/v1/user/checkEmailAndPassword [Post]
+// @Accept json
+// @Produce json
+// @Param param query viewmodels.CheckEmailAndPasswordReq true "请求参数"
+// @Success 200 {object} response.Res "请求响应"
+func (a *AccountController) CheckEmailAndPassword(c iris.Context) {
+	var req viewmodels.CheckEmailAndPasswordReq
+
+	if err := c.ReadJSON(&req); err != nil {
+		logiclog.CtxLogger(c).Warnf("bind err:(%+v)", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	// validate param
+	_, err := govalidator.ValidateStruct(req)
+	if err != nil {
+		logiclog.CtxLogger(c).Warnf("param validate err:(%+v)", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	//1 判断两次密码是否一致
+	if req.Password != req.ConfirmPassword {
+		response.Send(c, response.GetMessage(response.DifferentPassword, conf.ZH), nil)
+		return
+	}
+
+	//2 判断邮箱是否存在
+	exist, err := a.Service.IsEmailExist(c.Request().Context(), req.Email)
+	if err != nil {
+		logiclog.CtxLogger(c).Warnf("service err:(%+v)", err)
+		response.Send(c, err, nil)
+		return
+	}
+	//2 判断邮箱是否已存在
+	if exist {
+		response.Send(c, response.GetMessage(response.ErrEmailHasExisted, conf.EN), nil)
+		return
+	}
+
+	//3 验证邮箱验证码是否正确
+	ok, err := a.Service.VerifyEmailCode(c.Request().Context(), req.Email, req.EmailCode)
+	if err != nil {
+		logiclog.CtxLogger(c).Warnf("service err:(%+v)", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	if !ok {
+		response.Send(c, response.GetMessage(response.ErrEmailCode, conf.EN), nil)
+		return
+	}
+
+	//4 username做合规检测,检测不通过
+	a.Service.CheckUserName(req.UserName)
 }
