@@ -63,15 +63,15 @@ OAuth:
     AuthUrl: https://accounts.google.com/o/oauth2/auth  # oauth认证网关
     TokenUrl: https://oauth2.googleapis.com/token       # 用code 换取access token的网关
     RedirectUri: https://aov-test.creatorhuub.com/api/v1/userInfo/youtube/oauth/redirect   # 后端重定向uri
-    ClientId: 484635537955-tvs39tpkbirvtjse73epsmgm5doknjq0.apps.googleusercontent.com  # client id
-    ClientSecret: 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                                              # client secret
+    ClientId: 277828511900-m7va6rtf66o3d1rccim2po4gevd7p4jl.apps.googleusercontent.com  # client id
+    ClientSecret: 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                                              # client secret
     LoginRedirectUri: https://aov-test.creatorhuub.com/home/signmiddle
     YoutubeMinFans: 0 #youtube MIN FANS
 ContentModeration: #内容审核
   Domain: dev.intlgame.com
   Uri: /v1/sec/contentmoderation/uic
-  Appkey: itopsigkey
-  Appid: app1
+  Appkey: nZBGqgH8hsGLhcQZVeEj1wYK
+  Appid: fc53Cq1HgZbnNI09W0nIHQsxiOZKGc0O
   Gameid: 7
   BusiheadAppkey: key1
   BusiheadServicename: service1
@@ -80,44 +80,44 @@ Docusign:
   # The public key of the docusign
   PublicKey: |
     -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqpfdDVhuIU5U8cDF/zpJ
-    Swv0dTapJ6n57XpjPJW8T4am98iSmgf/aYfz1c5qyMMvHk1oi2COkOnPuvOhd+ty
-    UGjIT9sXHQzphUcOhDqQIY2Gt+zCnpthgxybwmWwdmiZL7Al39BuK8O9/o4HKafD
-    9SOpTvX2reJwZXrqsccMi6BnqHSp1uYtW57ebkCYYbjzFklBKIMuaYF4+qcEXxeu
-    03FM6eHdj7+HaMK5kLU1PjdRjUQ8TIqpsEucOR3rPYBvAK50n4PBE/wW12+G8yV5
-    YVstC42hcQb9xyuSfH2Ls3r2C/yqOuqLNd2bbE1sQW/1AJAwIjBtAGw6c+JLc+SH
-    AwIDAQAB
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkJDs/oaKMlaL/9ifFxMC
+    I+ASltItrvLP5giknoct2eyCKRl1lubm8xShY6hVClerGDHeAei88iq+xS80GvQM
+    UzMt2GIXsFkJXlPjQpUwwU7vjE3c6JO45n4PHatMgF24y8BYhhygz/r0LXUS/spR
+    fBfjw+xrAHM9sBM+5rphJk/qNlHezLjRSeUJtLg3gsVOcHt4SBmx95ot9Un/mnCf
+    97HdYQaQ36OLAb1avENekieLGjQsOotjqzOBOi81S5hQHX6TFCUWy5afLtBh1cuf
+    B+ADHO6amUQacYZtiC3qKt3G68mfLzHj4i5FqZbPks39srGxaeB9qhSQX/u6KfWs
+    8wIDAQAB
     -----END PUBLIC KEY-----
   # The private key of the docusign
   PrivateKey: |
     -----BEGIN RSA PRIVATE KEY-----
-    MIIEpQIBAAKCAQEAlaLy5itF7LBvWUmzCdebPML4roFy2Cpl4SMt2Udf2ZqF1AjZ
-    z8jJmplUtnMinqWLlJFxEGLgtmuOdfiIGYWFR3Djz8lMNr5bpy1Z9e2lkfmn2phH
-    tLm/DlsOTtQv94Dk9MB56msz0iuBD+qIErrW7fLvKh8vGjgElmausZhZ2wcdp3ZJ
-    FMvC+tP7XrqZEkmTusYLLaH1uJKgMo5Q/hSOZrVUNId80Px9h5Kpfae1UnecIpLr
-    clV7CDM0XD5rfSACZ9fJPqXPZ3rkG3L4jYJ9cbVfyyO1w621O1rd9c2w8D4zLr5I
-    D/Axg4wTDw14n27yzD18vDEjAJz3HRLSHad0twIDAQABAoIBAAHQrzehkMCVR1SC
-    81wMNILhLpkXUuhSY1f+0ECRgBUorbTrwpCls+RfNcrczK+1/GJ5/TAgsu8jkN/X
-    evcsSniaYvkTTQxg9MWrZCr6jgaeS634KO6FTk8DRcIpCsfq1VwutYvlbwR+qJsj
-    0jC/+Xl7d/E/3Zdo1I1qg3X+DiD9CUUOMwCNFZFlq8ezbIt0CG/xzpdA6fREr70u
-    ON0Fzgt7LN/ekMlPxvFhlfRsJTOYVdpQQ2VFQ8wB/Jxv/oVix/p79Y/xbErpc+rE
-    S1aa/bx68zM0hoKUwN2ZSG0uo8MDtHJmkytO2SoZrucUJKAgnDnUy+jxStu1x98A
-    g1lB9lECgYEA7g9nXVmea5ZchLl2kYZN+cfPMYCUo+orGMkrHZDIpU7NAtWMx6cc
-    2H6c2aHAwAkGNYOUJokxKPaQGg4N58EukupIShdUUq9rnt6HjsiZ2Zo1nLp+b5/p
-    ZEqJt6joZ9ii1o5AO+yJVcjWYxSjawdWLmLbrYFU/aB6p3C4TmIZkb8CgYEAoOmy
-    zoInL07QmpdafcPTtQFgTEr/Z/dqbLo5pamepWDu9zFvEKeZXSza+go9YOw1XMBy
-    dyI/WRC9oWoCeurcELu6oaPxISjYlVkwSj6F/n9eYCg9rXixfuAGRgekQcwbDWC6
-    FIxfTMW1CtzGPnP0losvqKwkqbjNwbxUmv3J6wkCgYEArluZ2UVKQoJeQNeVgABe
-    HBO8LQV/2I4qAn1UltL0Ih8VCH5gHdrHxcj2GG/gPMZfRdKZL6BL4TS1Vl/0z0ku
-    U2xEhf+QQv84U6OopWtHQ5kuqxvsftUgm9P8CggsL+L7YSnO4hTcgXgXjXoQNtOo
-    y1CclPekyB5Bt2FXnBE9qQECgYEAkES3AZuDklCxisjEYxmdyB0xv3VGRGp5Sn40
-    jSjkihW8angxwdbiE73Rnnhry2g796q7dcCI10vBGOU40Aedwortq1qXKEm81Tof
-    p5EjBaggb0nk8pDRYpVsSoEzbaKXZokgjKfGEcj4poKGYxwHYKnt0uZ0AI8mOtql
-    aEi+LjECgYEA10UXcEERfQ8yWH4q6BZ6CETebWaQxANA5g3U20bpbXwCaQ5BhUVw
-    LFL7ucxdbyoueHPvyUtqdBRjQ27TsO1UTMekoHvlyjwzuFEh8O1GmQ1GDDK60yj9
-    8Yvbw++JDVr7Pat+BXpfOJsTFIV4GvV3TGXyeySYRo8TRnwDcG7bkrM=
+    MIIEowIBAAKCAQEAkJDs/oaKMlaL/9ifFxMCI+ASltItrvLP5giknoct2eyCKRl1
+    lubm8xShY6hVClerGDHeAei88iq+xS80GvQMUzMt2GIXsFkJXlPjQpUwwU7vjE3c
+    6JO45n4PHatMgF24y8BYhhygz/r0LXUS/spRfBfjw+xrAHM9sBM+5rphJk/qNlHe
+    zLjRSeUJtLg3gsVOcHt4SBmx95ot9Un/mnCf97HdYQaQ36OLAb1avENekieLGjQs
+    OotjqzOBOi81S5hQHX6TFCUWy5afLtBh1cufB+ADHO6amUQacYZtiC3qKt3G68mf
+    LzHj4i5FqZbPks39srGxaeB9qhSQX/u6KfWs8wIDAQABAoIBAAGqA7PPmGzw6ldo
+    62cj52xIoYjQ3xTZEYDG7fqRF1z0w46FCQGbhOJZr8E+bOJ3JB85Dvf1qEyriAKB
+    Z6t0C2W0Wv7pixu9yLw6gBMv7FF9uMRYAQPGjjZ+KqgLg3HngMKeVwmT/EMmWQb6
+    vXpnUG0NAH4URyrCU4Ks6XfbLVY1MM8VwZS5GTvDAyUPpd2+pHr0dEP9Jebmzbxu
+    xVmbrCti+Fv9A1mfNG3fxSDvF2GVag4BcCWsmpFQLxFzzxqkmVQIIdfpjcjM8skE
+    GEoZqVUkaKm2kubcwtOi9pLBzm+lw50NGcBlGEfouS2UbM7vWTkCeKeCbZRfZaEH
+    G4eX1FkCgYEAy8az62Z/3vJz4TYhLB2K4mj+VLbZCrx9+Pj5loItLM41CvFyJxW5
+    Akc1ZJDZDdiMDlPUx0+q8HnEmE980gGwtrUB0IpH8mgkBsTFuUHRZhK6NHfmEfcN
+    VFGe8Q+cY/TDArdt5LIupRsgGMs9kTLx+Mkj3aX8h2mkUHk/GnN7UksCgYEAtZ2V
+    ZyM4/FOogJv07dpKJCD2KxGBCSNTtQGi2udbxaJPXSjMP8kx0ZI4JqqcBMpvCQvu
+    iTJmh06WdYC+PM5XEwJeDTPaB4eAFVPrj9AMnC0fHmvEHArJ5QXvaesYpTx52tEy
+    wmyIuV3ygXBullwOrD9G0z8dpNAiAcE9f0cypvkCgYEAoUvoMGWSw8OAC/0Ppt6/
+    h1V6M04EYKYwxHk2/naOEZArljzlkaB1MCNzVOX+mSIWQmUC4Lzj3rNT9Qe+EnD6
+    ErUV+Z7rMipSkfUBWRGLEVOzhkJ9nyzBpUNyHvevX8Nm9OiCmOqdV10wO8/sLNl5
+    hOaZeCGh0QHC6Vv/og1UyR8CgYBekdYQRKkRy0Y84fjiOf7NXVSSDKVSatDVuiph
+    LoP9H42QBwSEWnHUnP0cNU7Ut8ylu07Upif5YRS7zvRAmXmB7oOnAE8SCJ7LfE13
+    L3DBikVgA+G0cHG9DiAi2UaWFC2nobN6xiVT0PXMLQ2Iwhrp2nE44u6+uZpbq5Io
+    Spy3kQKBgHTPaPMlzZfcvYzi6cyb7Ur5UoSRzEvDw6c55iSnty2T1ovMx5+OyBbR
+    wPnY5jK2GIJC0bOB6AufH5YGItj3Ch5oZOhshZJW5blhugpDY9caggB73xPZGHAg
+    J5Fu4a9iNWMXPZGkwLSAgp/hAQ8kSlYdOyAAM6kf4coeXf9WYIJZ
     -----END RSA PRIVATE KEY-----
-  ClientId: fde3e4fc-322a-49cf-8167-08709a053f1c
+  ClientId: a3272141-68da-4304-a921-6397dd492261
   RedirectUri: https://pubgmobile.creatorhuub.com/home/docusignmiddle
   WebhookUri: https://pubgmobile.creatorhuub.com/api/v1/user/docusign/notifyEnvelopeStatus
   Sub: f385711f-9bb5-4cfe-818e-21a8f2c02b03

@@ -1,13 +1,16 @@
 package services
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/Baidu-AIP/golang-sdk/aip/censor"
 	"github.com/pkg/errors"
 	"ptc-Game/account/repositories"
 	"ptc-Game/account/web/viewmodels"
 	"ptc-Game/common/pkg/captcha"
+	"ptc-Game/common/pkg/config"
 	"ptc-Game/common/pkg/email"
 	"ptc-Game/common/response"
 	"ptc-Game/common/util"
@@ -26,9 +29,10 @@ type AccountService interface {
 	ResetPassword(ctx context.Context, req viewmodels.ResetPasswordReq) error
 	GetCaptcha(ctx context.Context) (*viewmodels.GetCaptchaRsp, error)
 	GetUserTag(ctx context.Context) (*viewmodels.GetUserTagRsp, error)
+	CheckUserName(userName string) (bool, error, string)
 }
 
-func NewAccountService(repo repositories.AccountRepository) AccountService {
+func NewAccountService(repo repositories.AccountRepository) *accountService {
 	return &accountService{
 		repo:       repo,
 		CaptchaSvc: captcha.New(captcha.Digit),
@@ -38,6 +42,30 @@ func NewAccountService(repo repositories.AccountRepository) AccountService {
 type accountService struct {
 	repo       repositories.AccountRepository
 	CaptchaSvc captcha.Captcha
+}
+
+func (a *accountService) CheckUserName(userName string) (bool, error, string) {
+	config := config.GetConfig().ContentModeration
+	//调用百度云检测服务
+	client := censor.NewClient(config.Appkey, config.Appid)
+	//如果是百度云ak sk,使用下面的客户端
+	//client=censor.NewCloudClient("ak","sk")
+	res := client.TextCensor(userName)
+	result := &viewmodels.CheckResult{}
+	err := json.Unmarshal([]byte(res), result)
+	if err != nil {
+		return false, err, ""
+	}
+
+	if result.Conclusion == "不合规" {
+		var stringBuilder bytes.Buffer
+		for _, v := range result.Data {
+			stringBuilder.WriteString(v.Msg)
+		}
+		return false, nil, stringBuilder.String()
+	}
+
+	return true, nil, "合规"
 }
 
 func (a *accountService) GetUserTag(ctx context.Context) (*viewmodels.GetUserTagRsp, error) {

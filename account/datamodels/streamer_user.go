@@ -31,6 +31,20 @@ type User struct {
 	Updater        int            `gorm:"column:updater"`
 }
 
+//签名表
+type StreamerSign struct {
+	Id           int    `gorm:"column:id;not null;primaryKey;autoIncrement;"`
+	UserId       int    `gorm:"column:user_id"`
+	EnvelopeId   string `gorm:"column:envelope_id"`
+	Status       string `gorm:"column:status"`
+	Manner       string `gorm:"column:manner"`
+	CreateTime   string `gorm:"column:create_time"`
+	CompleteTime string `gorm:"column:complete_time"` //完成时间
+	DeclineTime  string `gorm:"column:decline_time"`  //拒绝时间
+	DeclineReson string `gorm:"column:decline_reson"` //拒绝理由
+	DownloadUrl  string `gorm:"column:download_url"`
+}
+
 func (User) TableName() string {
 	return "streamer_user"
 }

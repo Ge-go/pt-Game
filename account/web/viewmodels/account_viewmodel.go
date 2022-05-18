@@ -9,6 +9,23 @@ type RegisterReq struct {
 	IsEuropean int    `json:"is_european" valid:"optional,in(0|1)" example:"1"` //勾选协议
 }
 
+type CheckResult struct {
+	LogID          int    `json:"log_id"`
+	Conclusion     string `json:"conclusion"`
+	ConclusionType int    `json:"conclusionType"`
+	Data           []struct {
+		Type           int    `json:"type"`
+		SubType        int    `json:"subType"`
+		Conclusion     string `json:"conclusion"`
+		ConclusionType int    `json:"conclusionType"`
+		Msg            string `json:"msg"`
+		Hits           []struct {
+			DatasetName string   `json:"datasetName"`
+			Words       []string `json:"words"`
+		} `json:"hits"`
+	} `json:"data"`
+}
+
 // POST: /api/v1/user/verifyEmail
 type VerifyEmailReq struct {
 	Email     string `json:"email" valid:"required~email is blank,email" example:"1254@qq.com"`
@@ -75,6 +92,34 @@ type GetUserTagRsp struct {
 type GoogleCallbackReq struct {
 	Code  string `json:"code" valid:"required~code is blank" example:"code"`
 	State string `json:"state" valid:"required~state is blank" example:"1:long"` // state=state-token
+}
+
+//内容审核结构体
+type ContentModeration struct {
+	Busihead BusiHead `json:"busihead"`
+	Busidata Busidata `json:"busidata"`
+}
+type BusiHead struct {
+	Appid       string `json:"appid"`
+	Appkey      string `json:"appkey"`
+	Servicename string `json:"servicename"`
+}
+type Busidata struct {
+	Username string `json:"username"`
+	Language string `json:"language"`
+}
+
+//内容审核返回结构体
+type ContentModerationRsp struct {
+	Errcode            int                `json:"errcode"`
+	Errmsg             string             `json:"errmsg"`
+	Seq                string             `json:"seq"`
+	Textfilterresponse Textfilterresponse `json:"textfilterresponse"`
+}
+
+type Textfilterresponse struct {
+	Hashed string                 `json:"Hashed"`
+	Result map[string]interface{} `json:"Result"`
 }
 
 //POST register step 1

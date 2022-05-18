@@ -13,6 +13,7 @@ import (
 	"ptc-Game/common/conf"
 	"ptc-Game/common/pkg/logiclog"
 	"ptc-Game/common/response"
+	"ptc-Game/common/util"
 )
 
 type AccountController struct {
@@ -451,5 +452,41 @@ func (a *AccountController) CheckEmailAndPassword(c iris.Context) {
 	}
 
 	//4 username做合规检测,检测不通过
-	a.Service.CheckUserName(req.UserName)
+	isok, err, msg := a.Service.CheckUserName(req.UserName)
+
+	if err != nil {
+		response.Send(c, err, nil)
+		return
+	}
+	if !isok {
+		response.Send(c, errors.New(msg), nil)
+		return
+	}
+
+	//5 获取redis info
+	registerInfo, err := a.Service.GetRegisterInfo(c.Request().Context(), req.Sub)
+	if registerInfo == nil || err == redis.Nil {
+		response.Send(c, response.GetMessage(response.NoYoutubeAuth, conf.EN), nil)
+		return
+	}
+	if err != nil {
+		logiclog.CtxLogger(c).Warnf("required code parameter: %+v", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	//加密密码
+	password, _ := util.GenHashPassword(req.Password)
+	registerInfo.Email = req.Email
+	registerInfo.Password = password
+	registerInfo.UserName = req.UserName
+
+	//6 保存registerinfo
+	if err = a.Service.SaveRegisterInfo(c.Request().Context(), *registerInfo); err != nil {
+		logiclog.CtxLogger(c).Warnf("required code parameter: %+v", err)
+		response.Send(c, err, nil)
+		return
+	}
+
+	response.Send(c, nil, nil)
 }

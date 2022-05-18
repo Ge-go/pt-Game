@@ -1,6 +1,7 @@
 package account
 
 import (
+	"github.com/kataras/iris/v12/core/router"
 	"github.com/kataras/iris/v12/mvc"
 	"ptc-Game/account/repositories"
 	"ptc-Game/account/services"
@@ -29,6 +30,14 @@ func Account(app *mvc.Application) {
 	app.Router.Post("/checkEmailAndPassword", accountContrl.CheckEmailAndPassword).Name = "验证邮箱和密码"
 
 	//初始化docusign控制器
-	//docusignRepo := repositories.NewDocusignRepository(datasource.GetDataSource())
-	//docusignService := services.NewDocusignService(docusignRepo)
+	docusignRepo := repositories.NewDocusignRepository(datasource.GetDataSource())
+	docusignService := services.NewDocusignService(docusignRepo)
+	app.Register(docusignService)
+	docusignContrl := &controllers.DocusignController{docusignService}
+	//docusign相关
+	app.Router.PartyFunc("/docusign", func(docusign router.Party) {
+		docusign.Get("/getAuthUrl", docusignContrl.GetAuthUrl).Name = "授权地址"
+		//回调通知
+		docusign.Post("/notifyEnvelopeStatus", docusignContrl.NotifyEnvelopeStatus).Name = "通知信封状态"
+	})
 }
