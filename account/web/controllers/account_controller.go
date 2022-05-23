@@ -344,7 +344,6 @@ func (a *AccountController) YoutubeLogin(c iris.Context) {
 	_, err := govalidator.ValidateStruct(callbackReq)
 	if err != nil {
 		logiclog.CtxLogger(c).Warnf("[YoutubeLogin] param validate err:(%+v)", err)
-		response.Send(c, err, nil)
 		return
 	}
 
